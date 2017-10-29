@@ -9,11 +9,13 @@ head(df)
 #table(unlist(df$cuisine))
 barplot(table(unlist(df$cuisine)), las = 2)
 #head(df[df$cuisine=='italian',])
-func <- function(row) {
-  row['ingredients']
-}
+
 for (cuisine in unique(df$cuisine)) {
   cuisine_df <- df[df$cuisine==cuisine,]
-  by(head(cuisine_df), 1:nrow(head(cuisine_df)), func)
+  print(cuisine)
+  print(head(sort(table(Reduce(c, cuisine_df$ingredients)), decreasing = TRUE), n = 10))
+  #by(head(cuisine_df), 1:nrow(head(cuisine_df)), func,dict)
+  #print(dict)
   Sys.sleep(5)
 }
+
